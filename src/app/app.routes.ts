@@ -21,7 +21,7 @@ export const routes: Routes = [
     component:DeleteEmComponent
 },
 {
-    path:"Search",
+    path:"search",
     component: SearchEmComponent
 },
 {

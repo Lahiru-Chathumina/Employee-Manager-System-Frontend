@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { em } from '../../model/em';
+import { employeeservices } from '../../service/employeeservice';
 @Component({
   selector: 'app-update-em',
   
@@ -11,9 +12,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './update-em.component.css'
 })
 export class UpdateEmComponent {
+  emlist : em []=[]
 
 
   public em:any ={
+    id: '', 
     name:"",
     email:"",
     addres:"",
@@ -21,12 +24,15 @@ export class UpdateEmComponent {
 
   }
 
-constructor(private http:HttpClient){
+constructor(private http:HttpClient , private employeeservices : employeeservices){
  
   }
 
   updateEm(){
-    this.http.put("http://localhost:8080/Staff/add",this.em).subscribe(res=>{})
+    this.employeeservices.updateEmployee(this.em.id ,this.em).subscribe((response :em[])=>{
+      console.log('Employee updated:', response);
+
+    })
   }
 
 }

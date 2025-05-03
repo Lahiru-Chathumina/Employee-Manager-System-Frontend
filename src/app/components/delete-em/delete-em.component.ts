@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-
+import { employeeservices } from '../../service/employeeservice';
+import { em } from '../../model/em';
 @Component({
   selector: 'app-delete-em',
   imports: [],
@@ -10,20 +11,16 @@ import { Component } from '@angular/core';
 export class DeleteEmComponent {
   selectedId: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private employeeservices:employeeservices) {}
 
   setDeleteId(id: any) {
     this.selectedId = id;
   }
 
-  confirmDelete() {
-    if (!this.selectedId) return;
+  confirmDelete(id:any) {
+    this.employeeservices.deleteEm(id).subscribe(()=>{
+      console.log('Employee deleted');
 
-    this.http.delete(`http://localhost:8080/Staff/delete/${this.selectedId}`).subscribe({
-      next: () => {
-        console.log('Customer deleted');
-      },
-      error: err => console.error('Delete failed:', err)
-    });
+    })
   }
 }

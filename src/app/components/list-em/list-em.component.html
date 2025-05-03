@@ -6,7 +6,6 @@
       <tr>
         <th scope="col" class="px-6 py-3">ID</th>
         <th scope="col" class="px-6 py-3">Name</th>
-        <th scope="col" class="px-6 py-3">Contact Number</th>
         <th scope="col" class="px-6 py-3">Email</th>
         <th scope="col" class="px-6 py-3">Address</th>
         <th scope="col" class="px-6 py-3">Salary</th>
@@ -18,7 +17,6 @@
       <tr *ngFor="let em of emlist" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <td class="px-6 py-4">{{ em.id }}</td>
         <td class="px-6 py-4">{{ em.name }}</td>
-        <td class="px-6 py-4">{{ em.contact }}</td>
         <td class="px-6 py-4">{{ em.email }}</td>
         <td class="px-6 py-4">{{ em.address }}</td>
         <td class="px-6 py-4">{{ em.salary }}</td>
@@ -34,5 +32,5 @@
 
     </tbody>
   </table>
-</div> <br>
+</div> 
 <app-add-em></app-add-em>

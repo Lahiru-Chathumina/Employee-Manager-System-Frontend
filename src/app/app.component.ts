@@ -13,7 +13,7 @@ import { UpdateEmComponent } from './components/update-em/update-em.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, CommonModule,  FormsModule, HomeComponent,DeleteEmComponent,SearchEmComponent,UpdateEmComponent,SearchEmComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, CommonModule,  FormsModule, HomeComponent,DeleteEmComponent,SearchEmComponent,UpdateEmComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })   

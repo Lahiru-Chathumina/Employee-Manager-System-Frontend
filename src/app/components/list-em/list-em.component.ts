@@ -1,32 +1,35 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { em } from '../../model/em';
 import { AddEmComponent } from "../add-em/add-em.component";
 import { CommonModule } from '@angular/common';
+import { employeeservices } from '../../service/employeeservice';
+
 @Component({
   selector: 'app-list-em',
-  imports: [AddEmComponent,CommonModule],
+  imports: [AddEmComponent, CommonModule],
   templateUrl: './list-em.component.html',
-  styleUrl: './list-em.component.css'
+  styleUrls: ['./list-em.component.css']
 })
-export class ListEmComponent {
-public emlist:any =[]
-  constructor(private http:HttpClient){
-    this.loardEmpy();
+export class ListEmComponent implements OnInit {
+
+  emlist: em[] = [];
+
+  constructor(private http: HttpClient, private emplyeeservices: employeeservices) { }
+
+  ngOnInit() {
+    this.loadEmployee(); 
   }
-   loardEmpy(){
-    this.http.get<em[]>("http://localhost:8080/Staff/get-all").subscribe(data=>{
-      this.emlist=data;
-      console.log(data)
-    })
-   }
 
-   
-
-   deleteEm(id: any) {
-    this.http.delete(`http://localhost:8080/Staff/delete/${id}`).subscribe(() => {
-      this.loardEmpy();
+  loadEmployee() {
+    this.emplyeeservices.loademployee().subscribe((emlist: em[]) => {
+      this.emlist = emlist;
     });
   }
-  
+
+  deleteEm(id: any) {
+    this.emplyeeservices.deleteEm(id).subscribe(() => {
+      this.emlist = this.emlist.filter(employee => employee.id !== id);
+    });
+  }
 }

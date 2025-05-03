@@ -1,25 +1,52 @@
-<!-- Include this in your component HTML -->
-<div class="relative w-full max-w-md mx-auto">
-    <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
-    <div class="relative">
-      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd"
-            d="M8 4a4 4 0 014 4v1h1a1 1 0 010 2h-1v1a4 4 0 01-8 0v-1H4a1 1 0 010-2h1V8a4 4 0 014-4zm0 2a2 2 0 00-2 2v1h4V8a2 2 0 00-2-2z"
-            clip-rule="evenodd"></path>
-        </svg>
-      </div>
-      <input
-        [(ngModel)]="searchTerm"
-        type="search"
-        id="search"
-        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-        placeholder="Search employees..."
-        required>
-      <button (click)="onSearch()" type="submit"
-        class="text-white absolute right-2.5 bottom-2.5 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
-        Search
-      </button>
-    </div>
+<div class="relative w-full max-w-md mx-auto mt-6">
+  <!-- Label for accessibility -->
+  <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+
+  <div class="relative">
+    <!-- Search input field -->
+    <input
+      [(ngModel)]="searchTerm" 
+      (keyup.enter)="onSearch(searchTerm)" 
+      type="search"
+      id="search" 
+      class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+      placeholder="Search by employee name..." 
+      required 
+      aria-label="Search employees">
+      
+    <!-- Search button -->
+    <button (click)="onSearch(searchTerm)" type="button"
+      class="text-white absolute right-2.5 bottom-2.5 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+      Search
+    </button>
   </div>
-  
+</div>
+
+<div *ngIf="searchResults.length > 0" class="overflow-x-auto mt-5">
+  <table class="w-full text-sm text-left text-gray-700 border shadow-2xl rounded-xl">
+    <thead class="text-xs text-white uppercase bg-gradient-to-r from-blue-500 to-indigo-600">
+      <tr>
+        <th scope="col" class="px-6 py-3">ID</th>
+        <th scope="col" class="px-6 py-3">Name</th>
+        <th scope="col" class="px-6 py-3">Email</th>
+        <th scope="col" class="px-6 py-3">Address</th>
+        <th scope="col" class="px-6 py-3">Salary</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <tr *ngFor="let em of searchResults" class="border-b hover:bg-blue-50 transition duration-300">
+        <td class="px-6 py-4">{{ em.id }}</td>
+        <td class="px-6 py-4">{{ em.name }}</td>
+        <td class="px-6 py-4">{{ em.email }}</td>
+        <td class="px-6 py-4">{{ em.address }}</td>
+        <td class="px-6 py-4">{{ em.salary }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Show message when no results are found -->
+<div *ngIf="searchResults.length === 0" class="text-center text-red-500 font-semibold mt-4">
+  <p>No results found</p>
+</div>
+
