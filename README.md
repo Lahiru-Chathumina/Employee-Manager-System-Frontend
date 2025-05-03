@@ -13,9 +13,9 @@ This is the frontend application for the **Employee Manager System**, built usin
 
 ## 📁 Project Structure
 
-src/
+-src/
 │
-├── app/
+-├── app/
 │   ├── components/           # Contains Angular components for adding, deleting, and updating employees
 │   │   ├── add-em/           # Component to add new employees
 │   │   ├── delete-em/        # Component to delete employees
